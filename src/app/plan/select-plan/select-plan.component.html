@@ -1,0 +1,76 @@
+<div class="row parameters-list">
+    <div *ngFor="let param of planParameters" class="col-md-3 col-6">
+        <div class="card text-white mb-3 parameter" [ngClass]="param.class">
+            <div class="card-body">
+                <div class="card-title parameter__title">{{param.title}}</div>
+                <div class="parameter__text">
+                    <div class="parameter__price">{{param.price.value | number: '1.0'}} تومان</div>
+                    <div class="parameter__unit">({{param.price.baseUnit | number: '1.0'}}
+                        {{param.unit}})</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <form [formGroup]="planForm">
+        <div id="plan-form">
+            <div class="form-group">
+                <label for="maxSynCall">حداکثر تماس همزمان (دقیقه)</label>
+                <input formControlName="maxSynCall" [attr.min]="parameterProp('maxSynCall','min')"
+                    [attr.max]="parameterProp('maxSynCall','max')" [attr.step]="parameterProp('maxSynCall','step')"
+                    type="range" class="form-control custom-range" id="maxSynCall" aria-describedby="maxSynCallPrice">
+                <small id="maxSynCallPrice" class="form-text text-muted">
+                    {{parameterPrice('maxSynCall')|number: '1.0'}} تومان
+                </small>
+                <span class="range-value text-primary">
+                    {{planForm.controls.maxSynCall.value|number: '1.0'}} تماس
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="maxCallTime">میزان مکالمه (دقیقه)</label>
+                <input formControlName="maxCallTime" [attr.min]="parameterProp('maxCallTime','min')"
+                    [attr.max]="parameterProp('maxCallTime','max')" [attr.step]="parameterProp('maxCallTime','step')"
+                    type="range" class="form-control custom-range" id="maxCallTime" aria-describedby="maxCallTimePrice">
+                <small id="maxCallTimePrice" class="form-text text-muted">
+                    {{parameterPrice('maxCallTime')|number: '1.0'}} تومان
+                </small>
+                <span class="range-value text-primary">
+                    {{planForm.controls.maxCallTime.value|number: '1.0'}} دقیقه
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="keepCallData">نگهداری فایل مکالمه تماس (روز)</label>
+                <input formControlName="keepCallData" [attr.min]="parameterProp('keepCallData','min')"
+                    [attr.max]="parameterProp('keepCallData','max')" type="number" class="form-control"
+                    id="keepCallData" aria-describedby="keepCallDataPrice">
+                <small id="keepCallDataPrice" class="form-text text-muted">
+                    {{parameterPrice('keepCallData')|number: '1.0'}} تومان
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="dataStorage">حجم ذخیره سازی اطلاعات (گیگ)</label>
+                <input formControlName="dataStorage" [attr.min]="parameterProp('dataStorage','min')"
+                    [attr.max]="parameterProp('dataStorage','max')" type="number" class="form-control" id="dataStorage"
+                    aria-describedby="dataStoragePrice">
+                <small id="dataStoragePrice" class="form-text text-muted">
+                    {{parameterPrice('dataStorage')|number: '1.0'}} تومان
+                </small>
+            </div>
+            <div class="alert alert-info">
+                <i class="fas fa-exclamation-triangle text-warning"></i>
+                توجه : بسته مورد نظر را انتخاب نمایید و سپس پرداخت را بزنید.
+                مبلغ نهایی بسته ها با توجه به مقادیر فرم بالا تعیین خواهد شد.
+            </div>
+        </div>
+        <div class="plans-list">
+            <div class="plan" *ngFor="let plan of planTypes">
+                <input class="plan__type" type="radio" [attr.id]="'plan-'+plan.value" name="planType"
+                    [value]="plan.value" formControlName="planType" #planType>
+                <app-plan-item [total]="totalPrice" [data]="planForm.controls" [type]="plan" [active]="planType.checked"
+                    [params]="planParameters">
+                </app-plan-item>
+            </div>
+        </div>
+    </form>
+</div>

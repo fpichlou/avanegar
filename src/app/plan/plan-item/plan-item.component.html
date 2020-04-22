@@ -1,0 +1,39 @@
+<div class="card plan-body" [ngClass]="{'active': active}">
+    <div class="card-body plan">
+        <div class="card-title plan__title">
+            <h5 class="text-success">
+                {{type.title}}
+            </h5>
+            <div *ngIf="type.discount" class="main-price text-danger">
+                <h6 class="d-inline">
+                    {{(total*type.value) | number: '1.0'}}
+                </h6>
+                <span class="currency">تومان</span>
+            </div>
+            <div class="price">
+                <h3 class="d-inline">
+                    {{(total*(type.discount?type.value-type.discount:type.value)) | number: '1.0'}}
+                </h3>
+                <span class="currency">تومان</span>
+            </div>
+        </div>
+        <div class="card-text">
+            <ul class="parameters-list">
+                <li class="parameter" *ngFor="let param of params">
+                    <span>{{param.title}}: </span>
+                    <div class="text-info parameter__value">
+                        <span>{{data[param.name].value}}</span>
+                        <span>{{param.unit}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="type.value==12" class="discount bg-peach-gradient">
+            <span>تخفیف</span>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-success btn-pey" [disabled]="!active"
+                [attr.type]="active?'submit':'button'">پرداخت</button>
+        </div>
+    </div>
+</div>

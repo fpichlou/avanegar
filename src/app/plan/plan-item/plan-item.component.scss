@@ -1,0 +1,85 @@
+@import 'src/theme/variables';
+
+.plan-body {
+
+    &.active {
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
+            0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        transform: scale(1, 1.03);
+        background: #f5f7f9;
+    }
+
+    .plan {
+        &__title {
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, .125);
+            padding-bottom: 0.5em;
+            position: relative;
+
+            .price {
+                color: $dark-primary;
+                padding: 1.5rem 0 1rem 0;
+            }
+
+            .main-price {
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                text-decoration: line-through;
+            }
+
+            .currency {
+                display: inline-block;
+                margin-right: 5px;
+                font-size: 13px;
+                color: #555;
+            }
+        }
+
+        .parameters-list {
+            font-size: 0.8rem;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0 2rem 0;
+
+            .parameter {
+                padding: 0.25em 0;
+                display: flex;
+
+                &:before {
+                    content: "\f00c";
+                    font-family: "Font Awesome 5 Free";
+                    display: inline-block;
+                    width: 1.3em;
+                    font-weight: bold;
+                    background: -webkit-gradient(linear, left top, left bottom, from(#05ffa3), to(#2096ff));
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+
+                &__value {
+                    margin-right: 5px;
+                }
+            }
+        }
+
+        .discount {
+            position: absolute;
+            top: -1em;
+            left: -1em;
+            width: 3.5em;
+            height: 3.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            color: #fff;
+        }
+
+        .btn-pey {
+            border-radius: 1.5em;
+            width: 10em;
+        }
+    }
+}
